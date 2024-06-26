@@ -1,18 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoffeeMap Projekt</title>
+    <title>Coffee Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Plugin -->
+    <link rel="stylesheet" href="lib/Control.MiniMap.css">
+
+
+    <link rel="stylesheet" href="main.css" />
+    <style>
+        #control-panel {
+            position: block;
+            top: 10px;
+            left: 50px;
+            z-index: 1000;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .slider-container {
+            margin-top: 10px;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>CoffeeMap Projekt</h1>
-    <h3>Teammitglieder:</h3>
-    <ul>
-        <li>Constantin Zackl</li>
-        <li>Benjamin Daiss</li>
-        <li>Marcel Böhm</li>
-    </ul>
-    <p><a href="konzept.pdf">Projektbeschreibung (konzept.pdf)</a></p>
+
+    <nav class="block bg-amber-800 p-6 shadow-lg">
+        <div class="container mx-auto flex items-center justify-start gap-6">
+            <div class="flex items-center">
+
+                <p class="text-white text-3xl font-extrabold tracking-wide"><i class="fa-solid fa-mug-hot"></i>
+                    CoffeeMap</p>
+            </div>
+            <div class="space-x-3">
+                <div id="control-panel" class="shadow-lg">
+                    <label for="dataSelector" class="block text-sm font-medium text-gray-700 mb-2">Select Data of
+                        Interest:</label>
+                    <select id="dataSelector" class="max-w-sm bg-white p-2 text-sm rounded-lg shadow-md">
+                        <option value="Total.Cup.Points">Total Cup Points</option>
+                        <option value="Aroma">Aroma</option>
+                        <option value="Flavor">Flavor</option>
+                        <option value="Aftertaste">Aftertaste</option>
+                        <option value="Acidity">Acidity</option>
+                        <option value="Body">Body</option>
+                        <option value="Balance">Balance</option>
+                        <option value="Uniformity">Uniformity</option>
+                        <option value="Clean.Cup">Clean Cup</option>
+                        <option value="Sweetness">Sweetness</option>
+                        <option value="Cupper.Points">Cupper Points</option>
+                        <option value="Arabica Production">Arabica Production</option>
+                        <option value="Bean Exports">Bean Exports</option>
+                        <option value="Bean Imports">Bean Imports</option>
+                        <option value="Beginning Stocks">Beginning Stocks</option>
+                        <option value="Domestic Consumption">Domestic Consumption</option>
+                        <option value="Ending Stocks">Ending Stocks</option>
+                        <option value="Exports">Exports</option>
+                        <option value="Imports">Imports</option>
+                        <option value="Other Production">Other Production</option>
+                        <option value="Production">Production</option>
+                        <option value="Roast & Ground Exports">Roast & Ground Exports</option>
+                        <option value="Roast & Ground Imports">Roast & Ground Imports</option>
+                        <option value="Robusta Production">Robusta Production</option>
+                        <option value="Rst,Ground Dom. Consum">Rst,Ground Dom. Consum</option>
+                        <option value="Soluble Dom. Cons.">Soluble Dom. Cons.</option>
+                        <option value="Soluble Exports">Soluble Exports</option>
+                        <option value="Soluble Imports">Soluble Imports</option>
+                        <option value="Total Distribution">Total Distribution</option>
+                        <option value="Total Supply">Total Supply</option>
+                    </select>
+                    <div class="slider-container mt-2">
+                        <label class=" text-sm font-medium text-gray-700 " for="yearSlider">Year <span
+                                id="yearLabel">2016</span></label>
+                        <input type="range" id="yearSlider" min="1960" max="2024" value="2016" step="1">
+                    </div>
+                    <div class="mt-2">
+                        <label for="monthSelector" class="block text-sm font-medium text-gray-700 mb-2">Select Month for
+                            Climate Data</label>
+                        <select id="monthSelector">
+                            <option value="0">January</option>
+                            <option value="1">February</option>
+                            <option value="2">March</option>
+                            <option value="3">April</option>
+                            <option value="4">May</option>
+                            <option value="5">June</option>
+                            <option value="6">July</option>
+                            <option value="7">August</option>
+                            <option value="8">September</option>
+                            <option value="9">October</option>
+                            <option value="10">November</option>
+                            <option value="11">December</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="map" style="width: 100%"></div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+    <script src="countries.js"></script>
+    <script src="refills.js"></script>
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="/libs/fullscreen/Control.FullScreen.css" />
+    <script src="/libs/fullscreen/Control.FullScreen.js"></script>
+    <script src="lib/Control.MiniMap.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 </body>
+
 </html>

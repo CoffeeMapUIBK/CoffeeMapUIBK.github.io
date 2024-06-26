@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Bike Trail Tirol Beispiel</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+    <!-- Leaflet Providers -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-providers/1.13.0/leaflet-providers.min.js" integrity="sha512-5EYsvqNbFZ8HX60keFbe56Wr0Mq5J1RrA0KdVcfGDhnjnzIRsDrT/S3cxdzpVN2NGxAB9omgqnlh4/06TvWCMw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Leaflet FullScreen -->
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+
+    <!-- leaflet-elevation -->
+    <link rel="stylesheet" href="https://unpkg.com/@raruto/leaflet-elevation/dist/leaflet-elevation.css" />
+    <script src="https://unpkg.com/@raruto/leaflet-elevation/dist/leaflet-elevation.js"></script>
+
+    <!-- Plugin -->
+    <link rel="stylesheet" href="lib/Control.MiniMap.css">
+    <script src="lib/Control.MiniMap.js"></script>
+
+
+    <!-- eigene Stile und Hauptskript -->
+    <link rel="stylesheet" href="main.css">
+    <script  src="etappen.js"></script>
+    <script defer src="main.js"></script>
+</head>
+
+<body>
+    <main>
+        <header>
+            <h2><i class="fa-solid fa-person-biking"></i> Bike Trail Tirol Beispiel</h2>
+            <nav>
+                <i class="fab fa-github"></i> <a href="https://github.com/webmapping/biketirol">Github</a>
+            </nav>
+        </header>
+        <article>
+            <h1><a href="https://www.tirol.at/reisefuehrer/sport/radfahren/biketouren/a-bike-trail-tirol-kufstein-koessen">Etappe 10: Kufstein - Kössen</a></h1>
+            <p>Die mittelschwierige Etappe verläuft auf gut ausgebauten Radwanderwegen und Forststraßen und
+                ist geprägt von saftigen Wiesen und grünen Wäldern, die in die imposante Kulisse des
+                Kaisergebirges eingebettet sind. Nach dem Ort Durchholzen erfolgt ein Anstieg mit 350 Höhenmeter
+                bis zur Gwirchtalm – ist diese Steigung überwunden, führt der Weg abwärts über das Habersautal
+                zum Walchsee – ein Bad bietet hier angenehme Abkühlung und sorgt für eine erfrischende
+                Weiterfahrt bis nach Kössen.
+            </p>
+
+            <div class="summary">
+                <div class="summary-badge">
+                    <i class="fas fa-walking"></i> 33,8 km
+                </div>
+                <div class="summary-badge">
+                    <i class="fas fa-clock"></i> 3 h
+                </div>
+                <div class="summary-badge">
+                    <i class="fas fa-sort-amount-up-alt"></i> 770 m
+                </div>
+                <div class="summary-badge">
+                    <i class="fas fa-mountain"></i> 1020 m
+                </div>
+                <div class="summary-badge">
+                    <i class="fas fa-sort-amount-down-alt"></i> 660 m
+                </div>
+                <div class="summary-badge">
+                    <i class="fa-solid fa-heart-pulse"></i> Mittelschwierig
+                </div>
+                <div class="summary-badge">
+                    <i class="fas fa-download"></i> <a href="https://www.tirol.at/action/download?id=address_668&downloadId=432">Download GPX</a>
+                </div>
+            </div>
+
+            <select id="pulldown">
+                <option vlaue="etappe1">Etappenauswahl</option>
+            </select>
+
+            <div id="map"></div>
+            <div id="profile"></div>
+
+            <h3>Streckenbeschreibung</h3>
+            <p>
+                Zunächst folgt man 2 Kilometer dem Radweg flussabwärts direkt am Inn, ehe man rechts nach Oberndorf -
+                Ebbs abzweigt. Das kleine Dorf wird durchquert und in weiterer Folge orientiert man sich immer an den
+                grünen Radwegweisern mit dem Bike Trail Tirol Logo. Durch Wiesen und Wälder geht es nun vorbei an Ebbs
+                Richtung Walchsee. Kurz vor dem Weiler Durchholzen erreicht man die Bundesstraße und radelt auf dieser
+                1,5 km durch den kleinen Ort (1,5 h ab dem Etappenstart) bis man wieder auf den Radweg (Nr.15) Richtung
+                Walchsee abzweigt. Kurz vor dem Walchsee im Weiler Oed zweigt man vom Radweg rechts Richtung Habersautal
+                (323) ab. Nun folgt ein Anstieg über 350 Höhenmeter zur Gwirchtalm, auf der anderen Seite hinab ins
+                Habersautal und weiter zur Hauptstraße in Walchsee (1,5 h ab Durchholzen). Auf dieser geht es etwa
+                einen Kilometer in östlicher Richtung bis man links auf den Radweg nach Kössen abzweigt (15). Von nun
+                an folgt man immer den Radwegweisern nach Kössen bis ins Zentrum (1 h ab Walchsee).
+            </p>
+
+        </article>
+        <footer>
+            <strong>Datenquellen:</strong>
+            <nav>
+                <a href="https://www.tirol.at/reisefuehrer/sport/mountainbiken/bike-trail-tirol">Bike Trail Tirol (Online Reiseführer Tirol)</a> |
+                <a href="https://www.tirol.at/reisefuehrer/sport/radfahren/biketouren/a-bike-trail-tirol-kufstein-koessen">Etappe 10: Kufstein - Kössen</a> |
+                <a href="https://www.data.gv.at/katalog/de/dataset/land-tirol_elektronischekartetirol">eGrundkarte Tirol</a>
+            </nav>
+        </footer>
+    </main>
+</body>
+
+</html>

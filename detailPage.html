@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Map</title>
+    <link rel="stylesheet" href="main.css" />
+    <script src="countries.js"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+
+    <nav class="block bg-amber-800 p-6 shadow-lg">
+        <div class="container mx-auto flex items-center justify-start gap-6">
+            <div class="flex items-center gap-3">
+
+                <p class="text-white text-3xl font-extrabold tracking-wide"><i class="fa-solid fa-mug-hot"></i>
+                    CoffeeMap</p>
+                <a href="index.html">
+                    <button class="bg-amber-600 hover:bg-amber-950 text-white font-bold py-2 px-4 rounded">
+                        <i class="fa-solid fa-arrow-left"></i> Zurück zur Karte
+                    </button>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="p-16 bg-gray-100">
+        <h1 class="text-3xl bold p-6"><span id="data"></span></h1>
+
+
+        <div id="control-panel" class="max-w-sm bg-white p-4 rounded-lg shadow-md">
+            <label for="dataSelector" class="block text-sm font-medium text-gray-700 mb-2">Select Data of
+                Interest:</label>
+            <select id="dataSelector"
+                class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                <option value="null">Select Data</option>
+                <option value="Aroma">Aroma</option>
+                <option value="Flavor">Flavor</option>
+                <option value="Aftertaste">Aftertaste</option>
+                <option value="Acidity">Acidity</option>
+                <option value="Body">Body</option>
+                <option value="Balance">Balance</option>
+                <option value="Uniformity">Uniformity</option>
+                <option value="Clean.Cup">Clean Cup</option>
+                <option value="Sweetness">Sweetness</option>
+                <option value="Cupper.Points">Cupper Points</option>
+                <option value="Arabica Production">Arabica Production</option>
+                <option value="Bean Exports">Bean Exports</option>
+                <option value="Bean Imports">Bean Imports</option>
+                <option value="Beginning Stocks">Beginning Stocks</option>
+                <option value="Domestic Consumption">Domestic Consumption</option>
+                <option value="Ending Stocks">Ending Stocks</option>
+                <option value="Exports">Exports</option>
+                <option value="Imports">Imports</option>
+                <option value="Other Production">Other Production</option>
+                <option value="Production">Production</option>
+                <option value="Roast & Ground Exports">Roast & Ground Exports</option>
+                <option value="Roast & Ground Imports">Roast & Ground Imports</option>
+                <option value="Robusta Production">Robusta Production</option>
+                <option value="Rst,Ground Dom. Consum">Rst,Ground Dom. Consum</option>
+                <option value="Soluble Dom. Cons.">Soluble Dom. Cons.</option>
+                <option value="Soluble Exports">Soluble Exports</option>
+                <option value="Soluble Imports">Soluble Imports</option>
+                <option value="Total Distribution">Total Distribution</option>
+                <option value="Total Supply">Total Supply</option>
+            </select>
+        </div>
+
+        <p id="error" class="italic text-gray-700 mt-16">No data available</p>
+        <canvas class="mt-16 max-w-lg max-h-96" id="myChart" width="400" height="200"></canvas>
+</body>
+
+<script src="detail.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
